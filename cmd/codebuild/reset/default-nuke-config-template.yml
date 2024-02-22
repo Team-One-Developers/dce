@@ -21,6 +21,7 @@ accounts:
       IAMRole:
         - "{{ .AdminRole}}"
         - "{{ .PrincipalRole}}"
+        - "OrganizationAccountAccessRole"
       IAMRolePolicy:
         - type: "contains"
           value: "{{ .AdminRole}}"
@@ -33,3 +34,7 @@ accounts:
         - "{{ .PrincipalRole}} -> {{ .PrincipalPolicy}}"
         - property: RoleName
           value: "{{ .AdminRole}}"
+      # If the root user of the sandbox account has two-factor auth enabled, this should not be removed (and also aws-nuke fails to delete it anyway)
+      IAMVirtualMFADevice:
+        - type: "contains"
+          value: "mfa/Authenticator"
