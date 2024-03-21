@@ -6,6 +6,7 @@ module "leases_lambda" {
   global_tags     = var.global_tags
   handler         = "leases"
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     DEBUG                              = "false"

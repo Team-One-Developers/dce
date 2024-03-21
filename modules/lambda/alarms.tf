@@ -1,5 +1,8 @@
 resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
   alarm_name                = "${var.name}-errors"
+
+  count = var.alarms_enabled ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "Errors"
@@ -19,6 +22,9 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
 
 resource "aws_cloudwatch_metric_alarm" "lambda_duration" {
   alarm_name          = "${var.name}-duration"
+
+  count = var.alarms_enabled ? 1 : 0
+  
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   namespace           = "AWS/Lambda"
@@ -37,6 +43,9 @@ resource "aws_cloudwatch_metric_alarm" "lambda_duration" {
 
 resource "aws_cloudwatch_metric_alarm" "lambda_throttles" {
   alarm_name          = "${var.name}-throttles"
+
+  count = var.alarms_enabled ? 1 : 0
+  
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 3
   namespace           = "AWS/Lambda"
@@ -61,7 +70,7 @@ resource "aws_sqs_queue" "lambda_dlq" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "dlq_not_empty" {
-  count               = var.dlq_enabled ? 1 : 0
+  count               = var.dlq_enabled && var.alarms_enabled ? 1 : 0
   alarm_name          = "${var.name}-dlq-not-empty"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1

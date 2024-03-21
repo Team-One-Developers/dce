@@ -6,6 +6,7 @@ module "credentials_web_page_lambda" {
   global_tags     = var.global_tags
   handler         = "credentials_web_page"
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     APIGW_DEPLOYMENT_NAME       = "api"

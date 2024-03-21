@@ -10,6 +10,7 @@ module "account_pool_metrics_lambda" {
   global_tags     = var.global_tags
   handler         = "account_pool_metrics"
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     DEBUG              = "false"

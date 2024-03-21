@@ -10,6 +10,7 @@ module "fan_out_update_lease_status_lambda" {
   global_tags     = var.global_tags
   handler         = "fan_out_update_lease_status"
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     AWS_CURRENT_REGION                = var.aws_region
@@ -33,6 +34,7 @@ module "update_lease_status_lambda" {
   handler         = "update_lease_status"
   global_tags     = var.global_tags
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     AWS_CURRENT_REGION                        = var.aws_region

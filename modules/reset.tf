@@ -31,6 +31,7 @@ module "populate_reset_queue" {
   global_tags     = var.global_tags
   handler         = "populate_reset_queue"
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     DEBUG              = "false"
@@ -78,6 +79,8 @@ module "process_reset_queue" {
   alarm_topic_arn = aws_sns_topic.alarms_topic.arn
   # Should be a 1/6 of the SQS queue visibility timeout
   timeout = 30
+
+  alarms_enabled  = var.technical_alarms_toggle
 
   environment = {
     DEBUG              = "false"

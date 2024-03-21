@@ -224,6 +224,12 @@ variable "allowed_regions" {
   description = "List of AWS regions which DCE Principals have access to. These regions will also be targeted for reset in nuke.yml."
 }
 
+variable "technical_alarms_toggle" {
+  type        = bool
+  description = "This toggle can be used to disable technical alarms that you may not need (e.g. api-gateway latency alarm). Important alarms such as budget alarms will still be active!"
+  default     = true
+}
+
 variable "orphaned_accounts_alarm_threshold" {
   type        = string
   description = "Alarm when number of orphaned accounts is greater than or equal to this threshold."

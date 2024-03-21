@@ -1,6 +1,9 @@
 # DynamoDB
 resource "aws_cloudwatch_metric_alarm" "dynamodb-account-systemerrors-alarm" {
   alarm_name                = "dynamodb-account-systemerrors-alarm-${var.namespace}"
+  
+  count = var.technical_alarms_toggle ? 1 : 0
+  
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "SystemErrors"
@@ -18,6 +21,9 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb-account-systemerrors-alarm" {
 
 resource "aws_cloudwatch_metric_alarm" "dynamodb-lease-systemerrors-alarm" {
   alarm_name                = "dynamodb-lease-systemerrors-alarm-${var.namespace}"
+  
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "SystemErrors"
@@ -35,6 +41,9 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb-lease-systemerrors-alarm" {
 
 resource "aws_cloudwatch_metric_alarm" "dynamodb-account-usererrors-alarm" {
   alarm_name                = "dynamodb-account-usererrors-alarm-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "UserErrors"
@@ -52,6 +61,9 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb-account-usererrors-alarm" {
 
 resource "aws_cloudwatch_metric_alarm" "dynamodb-lease-usererrors-alarm" {
   alarm_name                = "dynamodb-lease-usererrors-alarm-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "UserErrors"
@@ -70,6 +82,9 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb-lease-usererrors-alarm" {
 # API Gateway 4xx errors
 resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-4xx" {
   alarm_name                = "apigateway-alarm-4xx-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "4XXError"
@@ -88,6 +103,9 @@ resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-4xx" {
 # API Gateway 5xx errors
 resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-5xx" {
   alarm_name                = "apigateway-alarm-5xx-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = 1
   metric_name               = "5XXError"
@@ -105,6 +123,9 @@ resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-5xx" {
 
 resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-latency" {
   alarm_name          = "apigateway-alarm-latency-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 3
   namespace           = "AWS/ApiGateway"
@@ -121,6 +142,9 @@ resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-latency" {
 
 resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-integ-latency" {
   alarm_name          = "apigateway-alarm-integ-latency-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 3
   namespace           = "AWS/ApiGateway"
@@ -138,6 +162,9 @@ resource "aws_cloudwatch_metric_alarm" "apigateway-alarm-integ-latency" {
 # Simple Email Service Alarms
 resource "aws_cloudwatch_metric_alarm" "ses-bounce-delivery" {
   alarm_name          = "ses-bounced-delivery-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
   metric_name         = "Reputation.BounceRate"
@@ -151,6 +178,9 @@ resource "aws_cloudwatch_metric_alarm" "ses-bounce-delivery" {
 
 resource "aws_cloudwatch_metric_alarm" "ses-complaint-delivery" {
   alarm_name          = "ses-complaint-delivery-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
   metric_name         = "Reputation.ComplaintRate"
@@ -164,6 +194,9 @@ resource "aws_cloudwatch_metric_alarm" "ses-complaint-delivery" {
 
 resource "aws_cloudwatch_metric_alarm" "ses-reject-delivery" {
   alarm_name          = "ses-reject-delivery-${var.namespace}"
+
+  count = var.technical_alarms_toggle ? 1 : 0
+
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
   metric_name         = "Reputation.RejectRate"
