@@ -7,6 +7,14 @@ terraform {
       version = "~> 5.25.0"
     }
   }
+  
+  backend "s3" {
+    bucket = "dce-terraform-state-bucket"
+    key = "terraform.state"
+    region = "eu-central-1"
+    dynamodb_table = "dce-terraform-state-dynamo-table"
+    encrypt = true
+  }
 }
 
 provider "aws" {
