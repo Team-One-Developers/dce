@@ -98,7 +98,7 @@ variable "budget_notification_from_email" {
 }
 
 variable "budget_notification_bcc_emails" {
-  type        = list(string)
+  type        = set(string)
   description = "Budget notifications emails will be bcc-d to these addresses"
   default     = []
 }
